@@ -1081,6 +1081,15 @@ public:
     int8_t test_rangefinder(uint8_t argc, const Menu::arg *argv);
 
     int8_t reboot_board(uint8_t argc, const Menu::arg *argv);
+    
+    float _inputx;
+    float _inputy;
+    float _inputz;
+    float _inputyaw;
+    float _dx;
+    float _dy;
+    float _dz;
+    
 };
 
 #define MENU_FUNC(func) FUNCTOR_BIND(&copter, &Copter::func, int8_t, uint8_t, const Menu::arg *)
