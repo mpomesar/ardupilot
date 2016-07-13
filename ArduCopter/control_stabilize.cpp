@@ -23,6 +23,7 @@ bool Copter::stabilize_init(bool ignore_checks)
 // should be called at 100hz or more
 void Copter::stabilize_run()
 {
+    float des_x, des_y, des_z;
     float target_roll, target_pitch;
     float target_yaw_rate;
     float pilot_throttle_scaled;
@@ -41,13 +42,15 @@ void Copter::stabilize_run()
 
     // convert pilot input to lean angles
     // To-Do: convert get_pilot_desired_lean_angles to return angles as floats
-    get_pilot_desired_lean_angles(channel_roll->get_control_in(), channel_pitch->get_control_in(), target_roll, target_pitch, aparm.angle_max);
+    // get_pilot_desired_lean_angles(channel_roll->get_control_in(), channel_pitch->get_control_in(), target_roll, target_pitch, aparm.angle_max);
 
     // get pilot's desired yaw rate
-    target_yaw_rate = get_pilot_desired_yaw_rate(channel_yaw->get_control_in());
+    // target_yaw_rate = get_pilot_desired_yaw_rate(channel_yaw->get_control_in());
 
     // get pilot's desired throttle
-    pilot_throttle_scaled = get_pilot_desired_throttle(channel_throttle->get_control_in());
+    // pilot_throttle_scaled = get_pilot_desired_throttle(channel_throttle->get_control_in());
+
+    read_motion_and_pid(target_roll,target_pitch,target_yaw_rate,pilot_throttle_scaled);
 
     // call attitude controller
     attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw(target_roll, target_pitch, target_yaw_rate, get_smoothing_gain());
