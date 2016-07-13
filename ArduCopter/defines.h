@@ -104,7 +104,6 @@ enum control_mode_t {
     POSHOLD =      16,  // automatic position hold with manual override, with automatic throttle
     BRAKE =        17,  // full-brake using inertial/GPS system, no pilot input
     THROW =        18   // throw to launch mode using inertial/GPS system, no pilot input
-    PID_NAV =      19   // Automatic control of the position using PID's
 };
 
 enum mode_reason_t {
