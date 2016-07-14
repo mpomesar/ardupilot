@@ -4,7 +4,7 @@ def reading_serial():
     s=serial.Serial(port="/dev/ttyAMA0",baudrate=9600,timeout=0.2)
     l=s.readline();
     if s=="":
-        return 0,0,0,0
+        return 0,0,1,0
     else:
         line=l.split(';')
         x=float(line[0])
