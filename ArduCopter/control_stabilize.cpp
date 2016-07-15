@@ -15,6 +15,17 @@ bool Copter::stabilize_init(bool ignore_checks)
     }
     // set target altitude to zero for reporting
     pos_control.set_alt_target(0);
+    _inputx=0;
+    _inputy=0;
+    _inputz=0;
+    _inputyaw=0;
+    _dx=0;
+    _dy=0;
+    _dz=0;
+    _roll_in=0;
+    _pitch_in=0;
+    _yaw_in=0;
+    _throttle_in=0.15;
 
     return true;
 }
@@ -23,7 +34,6 @@ bool Copter::stabilize_init(bool ignore_checks)
 // should be called at 100hz or more
 void Copter::stabilize_run()
 {
-    float des_x, des_y, des_z;
     float target_roll, target_pitch;
     float target_yaw_rate;
     float pilot_throttle_scaled;
@@ -50,8 +60,11 @@ void Copter::stabilize_run()
     // get pilot's desired throttle
     // pilot_throttle_scaled = get_pilot_desired_throttle(channel_throttle->get_control_in());
 
-    read_motion_and_pid(target_roll,target_pitch,target_yaw_rate,pilot_throttle_scaled);
-
+    //read_motion_and_pid(target_roll,target_pitch,target_yaw_rate,pilot_throttle_scaled);
+    target_roll=_roll_in;
+    target_pitch=_pitch_in;
+    target_yaw_rate=_yaw_in;
+    pilot_throttle_scaled=_throttle_in;
     // call attitude controller
     attitude_control.input_euler_angle_roll_pitch_euler_rate_yaw(target_roll, target_pitch, target_yaw_rate, get_smoothing_gain());
 
