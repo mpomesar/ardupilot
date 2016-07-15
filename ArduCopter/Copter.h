@@ -1055,7 +1055,7 @@ private:
     void dataflash_periodic(void);
     void accel_cal_update(void);
     
-    void read_motion_and_pid(float &roll_in, float &pitch_in,float &yaw_in,float &throttle_in);
+    void read_motion_and_pid();//float &roll_in, float &pitch_in,float &yaw_in,float &throttle_in);
 
 public:
     void mavlink_delay_cb();
