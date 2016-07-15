@@ -2,7 +2,7 @@
 #include "Copter.h"
 #include "Python.h"
 
-void Copter::read_motion_and_pid(float &roll_in, float &pitch_in,float &yaw_in,float &throttle_in)
+void Copter::read_motion_and_pid()//float &roll_in, float &pitch_in,float &yaw_in,float &throttle_in)
 {
 double result,x,y,z,yaw;
 Py_Initialize();
@@ -44,39 +44,34 @@ if (x==0 && y==0 && z==0 && yaw==0){
 
 
 float dt=0.04;
-yaw_in=constrain_float(5*(-yaw),-40,40);
-yaw_in=yaw_in*45*4.5/40;
+_yaw_in=constrain_float(5*(-yaw),-40,40);
+_yaw_in=_yaw_in*45*4.5/40;
 
-throttle_in=20*(1-z);
+_throttle_in=20*(1-z);
 _dz=((1-z)-_inputz)/dt+0.01*(((1-z)-_inputz)/dt-_dz);
-throttle_in+=7*_dz;
-throttle_in=constrain_float(throttle_in,-25,25);
-throttle_in=(throttle_in+25)/50;
-throttle_in=constrain_float(throttle_in,0.1,0.75);
+_throttle_in+=7*_dz;
+_throttle_in=constrain_float(_throttle_in,-25,25);
+_throttle_in=(_throttle_in+25)/50;
+_throttle_in=constrain_float(_throttle_in,0.1,0.75);
 
 
-pitch_in=10*(-x);
+_pitch_in=10*(-x);
 _dx=((-x)-_inputx)/dt+0.01*(((-x)-_inputx)/dt-_dx);
-pitch_in+=9*_dz;
-pitch_in=constrain_float(pitch_in,-15,15);
-pitch_in=(pitch_in)*45/15;
+_pitch_in+=9*_dz;
+_pitch_in=constrain_float(_pitch_in,-15,15);
+_pitch_in=(_pitch_in)*45/15;
 
 
-roll_in=10*(-y);
+_roll_in=10*(-y);
 _dy=((-y)-_inputy)/dt+0.01*(((-y)-_inputy)/dt-_dy);
-roll_in=9*_dy;
-roll_in=constrain_float(roll_in,-15,15);
-roll_in=(-roll_in)*45/15;
+_roll_in=9*_dy;
+_roll_in=constrain_float(_roll_in,-15,15);
+_roll_in=(-_roll_in)*45/15;
 
 _inputx=-x;
 _inputy=-y;
 _inputz=-z;
 
-
-
-
 return;
-
-
 
 }
