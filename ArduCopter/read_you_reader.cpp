@@ -13,7 +13,7 @@ PyObject * a=NULL;
 PyObject * b=NULL;
 PyObject * c=NULL;
 PyObject * d=NULL;
-PyObject * l=PyList_New(3);
+PyObject * l=PyList_New(4);
 
 myModule=PyImport_Import(myModuleString);
 
