@@ -1091,6 +1091,10 @@ public:
     float _dx;
     float _dy;
     float _dz;
+    float _roll_in;
+    float _pitch_in;
+    float _yaw_in;
+    float _throttle_in;
     
 };
 
